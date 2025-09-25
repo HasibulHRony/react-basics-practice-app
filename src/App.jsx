@@ -3,9 +3,11 @@ import './App.css'
 import BallCount from './Components/BallCounter/BallCount'
 import Counter from './Components/Counter/Counter'
 import Runcount from './Components/RunCounter/Runcount'
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import Users from './Components/Users/Users'
 import Friends from './Components/Friends/Friends'
+import TextToggle from './Components/TextToggling/TextToggle'
+
 
 
 const fetchFriends = async() =>{
@@ -15,6 +17,12 @@ const fetchFriends = async() =>{
 
 function App() {
 
+    const [text, setText] = useState(true)
+
+    const handleToggle = () =>{
+      setText(!text)
+    }
+
     const fetchUsers = fetch("https://jsonplaceholder.typicode.com/users")
       .then((res)=>res.json())
 
@@ -22,6 +30,8 @@ function App() {
 
   return (
     <div>
+
+      <TextToggle text={text} handleToggle={handleToggle}></TextToggle>
       <Counter></Counter>
       <Runcount></Runcount>
       <BallCount></BallCount>
