@@ -6,8 +6,8 @@ function TextToggle({text, handleToggle}){
             {
                 text ? <h1>Practicing React</h1> : " "
             }
-            <button onClick={handleToggle}>Shaw Text</button>
-            <button onClick={handleToggle}>Hide Text</button>
+            <button onClick={handleToggle}>{text ? "Hide text" : "Shaw text"}</button>
+           
         </div>
     );
 };
