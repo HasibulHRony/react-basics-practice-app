@@ -7,6 +7,7 @@ import { Suspense, useState } from 'react'
 import Users from './Components/Users/Users'
 import Friends from './Components/Friends/Friends'
 import TextToggle from './Components/TextToggling/TextToggle'
+import DummyUsers from './Components/DumyUsers/DummyUsers';
 
 
 
@@ -14,6 +15,11 @@ const fetchFriends = async() =>{
         const friendsData = await fetch('https://dummyjson.com/users')
         return friendsData.json()
       }
+
+const fetchDummyUsers = async() =>{
+  const dummyUsersData = await fetch('https://api.escuelajs.co/api/v1/users')
+  return dummyUsersData.json()
+}
 
 function App() {
 
@@ -28,6 +34,8 @@ function App() {
 
       const friendsPromise = fetchFriends()
 
+      const dummyUsersPromise = fetchDummyUsers()
+
   return (
     <div>
 
@@ -41,6 +49,10 @@ function App() {
 
       <Suspense fallback={<h3>Data is on the way......</h3>}>
         <Friends friendsPromise={friendsPromise}></Friends>
+      </Suspense>
+
+      <Suspense fallback={<h3>Loading...</h3>}>
+        <DummyUsers dummyUsersPromise={dummyUsersPromise}></DummyUsers>
       </Suspense>
 
     </div>
